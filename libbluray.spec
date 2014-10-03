@@ -1,11 +1,11 @@
 Summary:	Library to access Blu-Ray disks for video playback
 Name:		libbluray
-Version:	0.2.3
+Version:	0.6.2
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	ftp://ftp.videolan.org/pub/videolan/libbluray/%{version}/%{name}-%{version}.tar.bz2
-# Source0-md5:	684e420d2ebafa13786ae84364543cf9
+# Source0-md5:	f4d2f2cab53f976cbb22cbae069057bd
 URL:		http://www.videolan.org/developers/libbluray.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -25,6 +25,7 @@ embeddable in standard players such as mplayer and vlc.
 Summary:	Header files for libbluray library
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libxml2-devel
 
 %description devel
 Header files for libbluray library.
@@ -48,6 +49,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -64,7 +67,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libbluray.so
-%{_libdir}/libbluray.la
 %{_includedir}/libbluray
 %{_pkgconfigdir}/libbluray.pc
 
